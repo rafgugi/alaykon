@@ -1,0 +1,16 @@
+{
+  "name": "alaykon",
+  "version": "1.0.0",
+  "description": "This is the mOsT sEcUre mEssAGe eNcRypTioN.",
+  "main": "index.js",
+  "devDependencies": {
+    "ts-jest": "^26.5.1",
+    "typescript": "^4.1.5"
+  },
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC"
+}
