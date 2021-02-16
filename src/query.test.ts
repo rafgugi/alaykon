@@ -1,6 +1,7 @@
 import {
   Query,
   Transformer,
+  Mutator,
 } from "./query";
 
 interface QueryTestCase {
@@ -23,6 +24,29 @@ describe("Transformer", () => {
       src: "wala dalah km kok nggak ngapa ngapain?",
       dst: "wala dalah km kok kak napa kapain?",
     }
+  }
+  for (const name in tests) {
+    const t = tests[name];
+
+    it(name, async () => {
+      const got = t.query.encrypt(t.src);
+      expect(got).toEqual(t.dst);
+    });
+  }
+});
+
+describe("Mutator", () => {
+  const tests: TestCases = {
+    "transform everything once every 2 char": {
+      query: new Mutator(null, 1, 2),
+      src: "Idiiiiiih kitinyi kili sikit dikisih cuit",
+      dst: "IDiIiIiIh kItInYi kIlI SiKiT DiKiSiH CuIt",
+    },
+    "transform every vocal twice every 3 char": {
+      query: new Mutator("aiueo", 2, 3),
+      src: "Aduuuuhh katanya kalo sakit dikasih cuti",
+      dst: "AdUuUUhh kAtanya kalO sAkIt dIkAsih cUti",
+    },
   }
   for (const name in tests) {
     const t = tests[name];
