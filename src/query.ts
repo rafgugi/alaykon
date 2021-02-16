@@ -91,3 +91,24 @@ export class Mutator implements Query {
     return result
   }
 }
+
+// Bundler is basically a collection of queries. It will run encrypt
+// function for message for each query sequentially.
+export class Bundler implements Query {
+  queries: Query[];
+
+  constructor(...queries: Query[]) {
+    this.queries = queries;
+  }
+
+  encrypt(msg: string): string {
+    for (let i = 0; i < this.queries.length; i++) {
+      const query = this.queries[i];
+      if (query == null) {
+        continue;
+      }
+      msg = query.encrypt(msg);
+    }
+    return msg;
+  }
+}
