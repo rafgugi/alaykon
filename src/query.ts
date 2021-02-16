@@ -9,22 +9,21 @@ export class Transformer implements Query {
   replace: string;
 
   constructor(find: string, replace: string) {
-    this.find = find
-    this.replace = replace
+    this.find = find;
+    this.replace = replace;
   }
 
   encrypt(msg: string): string {
-    let result = ""
-    let replaceIterator = 0
-    const findLength = this.find.length
+    let replaceIterator = 0;
+    const findLength = this.find.length;
 
     for (let i = 0; i < msg.length; i++) {
       const el = msg.substr(i, findLength);
       if (el == this.find) {
-        const replace = this.replace[replaceIterator++ % this.replace.length]
+        const replace = this.replace[replaceIterator++ % this.replace.length];
         if (replace != el) {
-          msg = msg.substr(0, i) + replace + msg.substr(i + findLength)
-          i--
+          msg = msg.substr(0, i) + replace + msg.substr(i + findLength);
+          i--;
         }
       }
     }
