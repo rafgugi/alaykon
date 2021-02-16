@@ -32,11 +32,15 @@ export class Transformer implements Query {
   }
 }
 
+// CharSet is basically a string-boolean key value pair. It helps checking
+// the occurance of a unique string.
+interface CharSet { [key: string]: boolean }
+
 // Mutator switches character case (lower to upper vice versa) that contained
 // in `charSet` for `times` times every `every` characters. If charset empty,
 // switch every character case.
 export class Mutator implements Query {
-  charSet: { [key: string]: boolean };
+  charSet: CharSet;
   times: number = 1;
   every: number = 2;
 
@@ -74,8 +78,8 @@ export class Mutator implements Query {
     }).join('');
   }
 
-  private buildCharSet(charSet: string | null): { [key: string]: boolean } {
-    let result: { [key: string]: boolean } = {}
+  private buildCharSet(charSet: string | null): CharSet {
+    let result: CharSet = {}
     if (charSet == null) {
       return result
     }
