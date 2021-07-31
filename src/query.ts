@@ -5,12 +5,17 @@ export interface Query {
 // Transformer is actually a replacer. `find` is a character to be replaced
 // with each character of string `replace` sequentially.
 export class Transformer implements Query {
+  static readonly pattern: RegExp = /\A\s*([^\s]+)\s*=\s*(.+)\s*\z/;
   find: string; // char
   replace: string;
 
   constructor(find: string, replace: string) {
     this.find = find;
     this.replace = replace;
+  }
+
+  static fromString(query: string): Query {
+
   }
 
   encrypt(msg: string): string {
